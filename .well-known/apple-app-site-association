@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["P3F54L5BAH.com.buzzie.newslens"],
+        "components": [{ "/": "/f/*", "comment": "Shared News Lens filters" }]
+      }
+    ]
+  }
+}

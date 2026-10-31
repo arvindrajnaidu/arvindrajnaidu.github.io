@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>A shared reading filter · News Lens</title>
+<meta name="description" content="Someone shared a News Lens reading filter with you.">
+<style>
+  :root { --paper: #f3efe6; --card: #fbf9f4; --ink: #1d1b18; --muted: #6b6458; --amber: #e8a317; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #211f1c; --card: #2b2824; --ink: #ede8df; --muted: #b3ab9f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink);
+    font: 17px/1.5 -apple-system, system-ui, sans-serif; display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); }
+  main { width: 100%; max-width: 420px; background: var(--card); border-radius: 20px; padding: 32px 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06); text-align: center; }
+  .brand { font: 700 15px -apple-system, system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  h1 { font: 700 28px/1.2 Georgia, "Times New Roman", serif; margin: 12px 0 10px; }
+  p { margin: 0 0 24px; color: var(--muted); }
+  .site { color: var(--ink); font-weight: 600; }
+  a.get { display: block; padding: 15px; border-radius: 14px; background: var(--amber); color: #1d1b18;
+    font-weight: 600; text-decoration: none; }
+  .small { margin: 16px 0 0; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">News Lens</div>
+  <h1>A reading filter, shared with you</h1>
+  <p>Someone shared the text they keep on <span class="site" id="site">a news site</span>, so you can read it without the clutter.</p>
+  <a class="get" href="https://apps.apple.com/app/id6828901858">Get News Lens</a>
+  <p class="small">Already have it? Open this link again on your iPhone and it opens in News Lens.</p>
+</main>
+<script>
+  // Shared links look like /f/<site>#<filter>; show the site's name.
+  var host = decodeURIComponent(location.pathname.replace(/^\/f\/?/, '').split('/')[0] || '');
+  if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)) document.getElementById('site').textContent = host.replace(/^www\./, '');
+</script>
+</body>
+</html>
