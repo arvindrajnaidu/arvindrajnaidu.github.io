@@ -23,6 +23,7 @@
   a.get { display: block; padding: 15px; border-radius: 14px; background: var(--amber); color: #1d1b18;
     font-weight: 600; text-decoration: none; }
   .small { margin: 16px 0 0; font-size: 14px; }
+  a.alt { margin-top: 10px; background: none; color: var(--ink); border: 1.5px solid var(--muted); }
 </style>
 </head>
 <body>
@@ -30,13 +31,20 @@
   <div class="brand">News Lens</div>
   <h1>A reading filter, shared with you</h1>
   <p>Someone shared the text they keep on <span class="site" id="site">a news site</span>, so you can read it without the clutter.</p>
-  <a class="get" href="https://apps.apple.com/app/id6828901858">Get News Lens</a>
-  <p class="small">Already have it? Open this link again on your iPhone and it opens in News Lens.</p>
+  <a class="get" id="open" href="newslens://">Open in News Lens</a>
+  <a class="get alt" href="https://apps.apple.com/app/id6828901858">Get News Lens</a>
+  <p class="small">On an iPhone with News Lens, tapping the shared link opens it in the app.</p>
 </main>
 <script>
   // Shared links look like /f/<site>#<filter>; show the site's name.
   var host = decodeURIComponent(location.pathname.replace(/^\/f\/?/, '').split('/')[0] || '');
-  if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)) document.getElementById('site').textContent = host.replace(/^www\./, '');
+  if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)) {
+    document.getElementById('site').textContent = host.replace(/^www\./, '');
+    // The same link for the app's own scheme (a link to this site tapped here stays in Safari).
+    document.getElementById('open').href = 'newslens://f/' + encodeURIComponent(host) + location.hash;
+  } else {
+    document.getElementById('open').style.display = 'none';
+  }
 </script>
 </body>
 </html>
